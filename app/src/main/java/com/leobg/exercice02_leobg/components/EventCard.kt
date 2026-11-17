@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.leobg.exercice02_leobg.models.Event
+import com.leobg.exercice02_leobg.ui.theme.Exercice02_leobgTheme
 
 @Composable
 fun EventCard(event: Event, onBook: () -> Unit) {
@@ -56,7 +57,9 @@ fun EventCard(event: Event, onBook: () -> Unit) {
 @Composable
 @Preview
 fun EventCardPreview() {
-    Box(modifier = Modifier.size(400.dp, 400.dp)) {
-        EventCard(event = Event(2, "titre", "categorie", "Paris", capacity = 5)) { }
+    Exercice02_leobgTheme {
+        Box(modifier = Modifier.size(400.dp, 400.dp)) {
+            EventCard(event = Event(2, "titre", "categorie", "Paris", capacity = 5)) { }
+        }
     }
 }
