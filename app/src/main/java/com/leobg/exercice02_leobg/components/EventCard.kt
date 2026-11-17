@@ -56,7 +56,9 @@ fun EventCard(event: Event, onBook: () -> Unit) {
 @Composable
 @Preview
 fun EventCardPreview() {
-    Box(modifier = Modifier.size(400.dp, 400.dp)) {
-        EventCard(event = Event(2, "titre", "categorie", "Paris", capacity = 5)) { }
+    Exercice02_leobgTheme {
+        Box(modifier = Modifier.size(400.dp, 400.dp)) {
+            EventCard(event = Event(2, "titre", "categorie", "Paris", capacity = 5)) { }
+        }
     }
 }
