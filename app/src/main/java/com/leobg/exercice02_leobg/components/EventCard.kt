@@ -32,7 +32,7 @@ import com.leobg.exercice02_leobg.models.Event
 import com.leobg.exercice02_leobg.ui.theme.Exercice02_leobgTheme
 
 @Composable
-fun EventCard(event: Event, onBook: () -> Unit) {
+fun EventCard(event: Event, onBook: (event: Event) -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -42,7 +42,11 @@ fun EventCard(event: Event, onBook: () -> Unit) {
             .padding(16.dp)
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text(event.title, fontSize = 20.sp, color = MaterialTheme.colorScheme.background)
+            Text(
+                event.title,
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.background
+            )
             Badge { Text(event.category, fontSize = 12.sp) }
             if (event.location != null) {
                 Row(
@@ -57,18 +61,22 @@ fun EventCard(event: Event, onBook: () -> Unit) {
                     )
                     Text(
                         event.location,
-                        fontSize = 12.sp,
+                        style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.background
                     )
                 }
             }
             Text(
                 "places restantes: ${event.capacity}",
-                fontSize = 12.sp,
+                style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.background
             )
-            Button(onBook) {
-                Text("Réserver", fontSize = 12.sp, color = MaterialTheme.colorScheme.background)
+            Button({ onBook(event) }) {
+                Text(
+                    "Réserver",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.background
+                )
             }
         }
     }
@@ -79,7 +87,7 @@ fun EventCard(event: Event, onBook: () -> Unit) {
 fun EventCardPreview() {
     Exercice02_leobgTheme {
         Box(modifier = Modifier.size(400.dp, 400.dp)) {
-            EventCard(event = Event(2, "titre", "categorie", "Paris", capacity = 5)) { }
+            EventCard(event = Event(2, "titre", "categorie", capacity = 5, "Paris")) { }
         }
     }
 }

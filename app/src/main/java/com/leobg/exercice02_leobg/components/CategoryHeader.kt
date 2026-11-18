@@ -37,7 +37,7 @@ fun CategoryHeader(categories: List<String>) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         items(categories) {
-            Badge { Text(it, fontSize = 12.sp, modifier = Modifier.padding(1.dp)) }
+            Badge { Text(it, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(1.dp)) }
         }
     }
 }

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -32,13 +33,13 @@ fun EventListScreen(events: List<Event>, onBook: (event: Event) -> Unit) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            TopAppBar(title = { Text("Campus", fontSize = 36.sp) })
+            TopAppBar(title = { Text("Campus", style = MaterialTheme.typography.titleLarge) })
         }
     ) { innerPadding ->
         Column(
             modifier = Modifier.padding(innerPadding),
             verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {     
+        ) {
             CategoryHeader(categories)
             LazyColumn(
                 Modifier
@@ -59,11 +60,11 @@ fun EventListScreen(events: List<Event>, onBook: (event: Event) -> Unit) {
 @Preview
 fun EventListScreenPreview() {
     val eventList = listOf(
-        Event(0, "Pogo sur la Seine", "Punk", "Paris", 120),
-        Event(1, "Mob publique anti-fa", "Mobilisation", "Lyon", 8),
+        Event(0, "Pogo sur la Seine", "Punk", 120, "Paris"),
+        Event(1, "Mob publique anti-fa", "Mobilisation", 8, "Lyon"),
         Event(2, "Adieu à Teddy Riner", "funérailles politiques", capacity = 4),
-        Event(3, "Grève générale", "pas content", "Partout", 0),
-        Event(4, "Laver le linge de Macron", "troll", "Elysée", 5000),
+        Event(3, "Grève générale", "pas content", 0, "Partout"),
+        Event(4, "Laver le linge de Macron", "troll", 5000, "Elysée"),
     )
 
     Exercice02_leobgTheme {

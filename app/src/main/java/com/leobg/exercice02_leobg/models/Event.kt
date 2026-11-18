@@ -4,6 +4,7 @@ data class Event(
     val id: Int,
     val title: String,
     val category: String,
+    val capacity: Int = 0,
     val location: String? = null,
-    val capacity: Int
+    val description: String = "",
 )
