@@ -3,6 +3,7 @@ package com.leobg.exercice02_leobg.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -26,23 +27,29 @@ import com.leobg.exercice02_leobg.ui.theme.Exercice02_leobgTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EventListScreen(events: List<Event>, onBook: (event: Event) -> Unit) {
+    val categories = events.map { it.category }.distinct()
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-             TopAppBar( title = {Text("Campus", fontSize = 36.sp)})
+            TopAppBar(title = { Text("Campus", fontSize = 36.sp) })
         }
     ) { innerPadding ->
-        LazyColumn(
-            Modifier
-                .wrapContentHeight()
-                .fillMaxWidth()
-                .padding(innerPadding)
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(4.dp),
+        Column(
+            modifier = Modifier.padding(innerPadding),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            items(events, key = { it.id }) {
-                EventCard(it) { onBook(it) }
+            CategoryHeader(categories)
+            LazyColumn(
+                Modifier
+                    .wrapContentHeight()
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+            ) {
+                items(events, key = { it.id }) {
+                    EventCard(it) { onBook(it) }
+                }
             }
         }
     }
