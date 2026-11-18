@@ -38,7 +38,7 @@ fun EventListScreen(events: List<Event>, onBook: (event: Event) -> Unit) {
         Column(
             modifier = Modifier.padding(innerPadding),
             verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
+        ) {     
             CategoryHeader(categories)
             LazyColumn(
                 Modifier
