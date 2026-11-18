@@ -67,7 +67,7 @@ fun EventListScreenPreview() {
         Event(4, "Laver le linge de Macron", "troll", 5000, "Elysée"),
     )
 
-    Exercice02_leobgTheme {
+    Exercice02_leobgTheme(darkTheme = false) {
         EventListScreen(eventList) {}
     }
 }

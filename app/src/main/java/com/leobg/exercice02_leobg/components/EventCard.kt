@@ -25,9 +25,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.leobg.exercice02_leobg.R
 import com.leobg.exercice02_leobg.models.Event
 import com.leobg.exercice02_leobg.ui.theme.Exercice02_leobgTheme
 
@@ -44,10 +46,10 @@ fun EventCard(event: Event, onBook: (event: Event) -> Unit) {
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(
                 event.title,
-                style = MaterialTheme.typography.titleSmall,
+                style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.background
             )
-            Badge { Text(event.category, fontSize = 12.sp) }
+            Badge { Text(event.category, style = MaterialTheme.typography.bodySmall) }
             if (event.location != null) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -67,13 +69,13 @@ fun EventCard(event: Event, onBook: (event: Event) -> Unit) {
                 }
             }
             Text(
-                "places restantes: ${event.capacity}",
+                "${stringResource(R.string.remaining_places)}: ${event.capacity}",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.background
             )
             Button({ onBook(event) }) {
                 Text(
-                    "Réserver",
+                    stringResource(R.string.book),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.background
                 )
