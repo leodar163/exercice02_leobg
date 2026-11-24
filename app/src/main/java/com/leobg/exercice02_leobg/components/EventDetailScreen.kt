@@ -2,13 +2,17 @@ package com.leobg.exercice02_leobg.components
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.PinDrop
 import androidx.compose.material3.Badge
 import androidx.compose.material3.Button
@@ -29,11 +33,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.leobg.exercice02_leobg.R
 import com.leobg.exercice02_leobg.models.Event
+import com.leobg.exercice02_leobg.models.sample.sampleEvents
 import com.leobg.exercice02_leobg.ui.theme.Exercice02_leobgTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EventDetailScreen(event: Event, onBook: (event: Event) -> Unit) {
+fun EventDetailScreen(
+    event: Event,
+    isFavorite: Boolean = false,
+    onBook: (event: Event) -> Unit,
+    onFavorite: (Int) -> Unit
+) {
     Scaffold(
         modifier = Modifier.fillMaxSize(), topBar = {
             TopAppBar(title = { Text(event.title, style = MaterialTheme.typography.titleLarge) })
@@ -68,9 +78,23 @@ fun EventDetailScreen(event: Event, onBook: (event: Event) -> Unit) {
             OutlinedCard() {
                 Text(event.description, modifier = Modifier.padding(12.dp))
             }
-            Button({ onBook(event) }) {
-                Text(
-                    stringResource(R.string.book), style = MaterialTheme.typography.bodySmall
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Button({ onBook(event) }) {
+                    Text(
+                        stringResource(R.string.book), style = MaterialTheme.typography.bodySmall
+                    )
+                }
+
+                Icon(
+                    imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                    contentDescription = "favorite button",
+                    modifier = Modifier
+                        .size(64.dp)
+                        .clickable { onFavorite(event.id) },
                 )
             }
         }
@@ -80,15 +104,10 @@ fun EventDetailScreen(event: Event, onBook: (event: Event) -> Unit) {
 @Composable
 @Preview(uiMode = UI_MODE_NIGHT_YES)//ça marche pas...
 fun EventDetailScreenPreview() {
-    val event = Event(
-        0,
-        "Event Test",
-        "cate test",
-        3,
-        "Paris",
-        "En avant les amis pour une aventure de fifou dans un event de QUA.LI.TE"
-    )
     Exercice02_leobgTheme(darkTheme = true) {
-        EventDetailScreen(event, {})
+        EventDetailScreen(
+            sampleEvents[0].copy(description = "En avant les amis pour une aventure de fifou dans un event de QUA.LI.TE"),
+            false,
+            {}) {}
     }
 }
