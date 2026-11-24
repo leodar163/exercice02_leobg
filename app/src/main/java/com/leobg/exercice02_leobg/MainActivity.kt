@@ -14,12 +14,12 @@ import com.leobg.exercice02_leobg.models.Event
 import com.leobg.exercice02_leobg.ui.theme.Exercice02_leobgTheme
 
 class MainActivity : ComponentActivity() {
-    val eventList = listOf<Event>(
-        Event(0, "Pogo sur la Seine", "Punk", "Paris", 120),
-        Event(1, "Mob publique anti-fa", "Mobilisation", "Lyon", 8),
+    val eventList = listOf(
+        Event(0, "Pogo sur la Seine", "Punk", 120, "Paris"),
+        Event(1, "Mob publique anti-fa", "Mobilisation", 8, "Lyon"),
         Event(2, "Adieu à Teddy Riner", "funérailles politiques", capacity = 4),
-        Event(3, "Grève générale", "pas content", "Partout", 0),
-        Event(4, "Laver le linge de Macron", "troll", "Elysée", 5000),
+        Event(3, "Grève générale", "pas content", 0, "Partout"),
+        Event(4, "Laver le linge de Macron", "troll", 5000, "Elysée"),
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,21 +35,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Exercice02_leobgTheme {
-        Greeting("Android")
     }
 }

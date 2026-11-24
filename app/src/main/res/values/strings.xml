@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">exercice02_leobg</string>
+    <string name="book">Réserver</string>
+    <string name="remaining_places">places restantes</string>
 </resources>
